@@ -1,0 +1,20 @@
+# Jose Parral
+# Thermal HW
+
+from __future__ import division
+from numpy import *
+from scipy import *
+from math import *
+from pylab import *
+import random
+import matplotlib.pyplot as plt
+
+# PART 1 OF HW
+
+# Plotting a List of 10 random numbers ranging from 0 to 1
+
+plt.plot([random.random(),random.random(),random.random(),random.random(),random.random(),random.random(),random.random(),random.random(),random.random(),random.random()], [random.random(),random.random(),random.random(),random.random(),random.random(),random.random(),random.random(),random.random(),random.random(),random.random()], 'ro')
+plt.axis([0, 1, 0, 1])
+plt.show()
+
+
