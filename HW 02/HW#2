@@ -1,0 +1,119 @@
+# Jose Parral
+# Thermal HW #2
+
+from __future__ import division
+from pylab import *
+from math import *
+import random
+from scipy import *
+from numpy import *
+import matplotlib.pyplot as plt
+
+# Total Number of Steps
+N=20
+Distance=1
+
+#### 1D Random Walk
+
+# Function Defining
+
+def Walk(n):
+    j=0
+    steps=[0]*N
+    Pos_list=[]
+    while j<=n:
+        Pos=0
+        for i in range(N):
+            x=randint(0,2)
+            if x == 0:
+                x=x-1
+            steps[i]=x
+            Pos=Pos+Distance*steps[i]
+        Pos_list.append(Pos)
+        j=j+1
+    return Pos_list
+
+W=Walk(1000)
+
+# x Counts
+
+x=linspace(-N,N,21)
+x_count=[]
+for i in range(N+1):
+    Counts=W.count(2*i-20)
+    x_count.append(Counts)
+
+# x2
+
+n=int((N/2)+1)
+x2=[0]*n
+for i in range(n):
+    x2[i]=(2*i)**2
+
+# x2 Counts
+
+x2_count=[]
+for i in range(N+1):
+    W[i]=W[i]**2
+for j in range(n):
+    Counts=W.count((2*j)**2)
+    x2_count.append(Counts)
+
+# Plotting x and x Counts
+
+figure()
+plot(x,x_count)
+xlabel('Distance')
+ylabel('Frequency')
+title("Plotting x vs x count for 1000 Walks")
+show()
+
+# Plotting x2 and x2 Counts
+
+figure()
+plt.scatter(x2, x2_count)
+xlabel('x2 Distance')
+ylabel('Frequency of x2')
+title('Probability Distribution of x2')
+show()
+
+
+#### 2D Random Walk
+
+def Walk_2D(n):
+    j=0
+    xPosition_list=[]
+    yPosition_list=[]
+    steps_x=[0]*N
+    steps_y=[0]*N
+    while j<= n:
+        xPosition=0
+        yPosition=0
+        for i in range(N):
+            x=randint(0,2)
+            y=randint(0,2)
+            if x==0:
+                x=x-1
+            if y==0:
+                y=y-1
+            steps_x[i]=x
+            steps_y[i]=y
+            xPosition=xPosition+(Distance*steps_x[i])
+            yPosition=yPosition+(Distance*steps_y[i])
+        xPosition_list.append(xPosition)
+        yPosition_list.append(yPosition)
+        j=j+1
+    return (xPosition_list, yPosition_list)
+
+W2D=Walk_2D(1000)
+x=W2D[0]
+y=W2D[1]
+
+# 2D Walk Plotting
+
+figure()
+plt.scatter(x,y)
+xlabel('Distance relative to x')
+ylabel('Distance relative to y')
+title('2D Walk Distribution')
+show()
